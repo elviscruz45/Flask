@@ -10,8 +10,15 @@
 
 
 {% block content %}
+
+    {% if username %}
+        <h1>Bienvenido, {{ username | capitalize}} </h1>
+    {% endif %}
+
+
+
     {% if user_ip %}
-        <h1>Hello World Elvis, you are supose to be the best data scientist, your IP is {{user_ip}}</h1>
+        <h1>Your IP is {{user_ip}}</h1>
 
     {%else%}
         <a href="{{url_for("index")}}"> Ir a inicio</a>

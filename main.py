@@ -9,6 +9,8 @@ from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField,SubmitField
 from wtforms.validators import DataRequired
 
+#Testing
+import unittest
 
 #iniciar la aplicacion Flask
 app=Flask(__name__)
@@ -24,6 +26,13 @@ class LoginForm(FlaskForm):
     password=PasswordField("Password",validators=[DataRequired()])
     submit=SubmitField("Enviar")
 
+#Testing
+
+@app.cli.command()
+def test():
+    tests=unittest.TestLoader().discover("tests")
+    unittest.TextTestRunner().run(tests)
+    
 # error managements
 
 @app.errorhandler(404)
@@ -68,12 +77,6 @@ def hello():
         return redirect(url_for("index"))
 
     return render_template("hello.html",**context)
-
-
-
-
-
-
 
 
 if __name__=="__main__":

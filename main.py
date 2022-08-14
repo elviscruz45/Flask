@@ -1,18 +1,17 @@
 #bootstrap
 from ensurepip import bootstrap
 #Flask
-from flask import Flask,request,make_response,redirect, render_template,session , url_for,flash
+from flask import request,make_response,redirect, render_template,session , url_for,flash
 from flask_bootstrap import Bootstrap
-from flask_wtf import FlaskForm
 
-#wtf formularios
-from wtforms.fields import StringField, PasswordField,SubmitField
-from wtforms.validators import DataRequired
 
 #Testing
 import unittest
 
+#Importing files from app
 from app import create_app
+from app.forms import LoginForm
+
 
 #iniciar la aplicacion Flask
 app=create_app()
@@ -20,11 +19,8 @@ app=create_app()
 todos=["Comprar cafe","Enviar solicitud de compra","Entregar video a productor"]
 
 #Crear formularios
+## Se paso al archivo app/forms.py
 
-class LoginForm(FlaskForm):
-    username=StringField("Nombre de usuario",validators=[DataRequired()])
-    password=PasswordField("Password",validators=[DataRequired()])
-    submit=SubmitField("Enviar")
 
 #Testing
 

@@ -12,10 +12,10 @@ from wtforms.validators import DataRequired
 #Testing
 import unittest
 
+from app import create_app
+
 #iniciar la aplicacion Flask
-app=Flask(__name__)
-bootstrap=Bootstrap(app)
-app.config["SECRET_KEY"]="SUPER SECRETICIMO"
+app=create_app()
 
 todos=["Comprar cafe","Enviar solicitud de compra","Entregar video a productor"]
 

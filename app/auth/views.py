@@ -7,3 +7,4 @@ def login():
         "login_form":LoginForm()
     }
     return ""
+

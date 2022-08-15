@@ -75,6 +75,11 @@ def hello():
 #       flash("Nombre de usuario registrado con exito")
 #        return redirect(url_for("index"))
 
+    users=get_users()
+    for user in users:
+        print(user)
+        
+        
     return render_template("hello.html",**context)
 
 

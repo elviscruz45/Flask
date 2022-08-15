@@ -77,9 +77,16 @@ def hello():
 
     users=get_users()
     for user in users:
-        print(user)
+        print(user.id)
+        print(user.to_dict()["password"])
         
         
     return render_template("hello.html",**context)
+
+
+
+
+if __name__=="__main__":
+    app.run(port=5000,debug=True)
 
 

@@ -4,7 +4,6 @@ from ensurepip import bootstrap
 from flask import request,make_response,redirect, render_template,session , url_for,flash
 from flask_bootstrap import Bootstrap
 
-
 #Testing
 import unittest
 
@@ -13,8 +12,7 @@ from app import create_app
 from app.forms import LoginForm
 
 #Firestore base de datos
-from app.firestore_service import get_users
-
+from app.firestore_service import get_users , get_todos
 
 #iniciar la aplicacion Flask
 app=create_app()
@@ -54,8 +52,6 @@ def index():
     
     return response
 
-
-
 @app.route("/hello",methods=["GET"]) #,"POST"
 def hello():
     #user_ip=request.cookies.get("user_ip")
@@ -64,7 +60,7 @@ def hello():
     username=session.get("username")
     context={
         "user_ip":user_ip,
-        "todos":todos,
+        "todos":get_todos(user_id=username),
         #"login_form":login_form,
         "username":username
     }
@@ -82,7 +78,6 @@ def hello():
         
         
     return render_template("hello.html",**context)
-
 
 
 

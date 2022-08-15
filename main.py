@@ -3,6 +3,7 @@ from ensurepip import bootstrap
 #Flask
 from flask import request,make_response,redirect, render_template,session , url_for,flash
 from flask_bootstrap import Bootstrap
+from flask_login import login_required
 
 #Testing
 import unittest
@@ -21,7 +22,6 @@ todos=["Comprar cafe","Enviar solicitud de compra","Entregar video a productor"]
 
 #Crear formularios
 ## Se paso al archivo app/forms.py
-
 
 #Testing
 
@@ -52,36 +52,18 @@ def index():
     
     return response
 
-@app.route("/hello",methods=["GET"]) #,"POST"
+@app.route("/hello",methods=["GET"])
+@login_required
 def hello():
-    #user_ip=request.cookies.get("user_ip")
     user_ip=session.get("user_ip")
-    #login_form=LoginForm()
     username=session.get("username")
     context={
         "user_ip":user_ip,
         "todos":get_todos(user_id=username),
-        #"login_form":login_form,
         "username":username
-    }
-    
-#    if login_form.validate_on_submit():
-#       username=login_form.username.data
-#       session["username"]=username
-#       flash("Nombre de usuario registrado con exito")
-#        return redirect(url_for("index"))
-
-    users=get_users()
-    for user in users:
-        print(user.id)
-        print(user.to_dict()["password"])
-        
-        
+    }      
     return render_template("hello.html",**context)
-
 
 
 if __name__=="__main__":
     app.run(port=5000,debug=True)
-
-

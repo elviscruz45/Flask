@@ -12,6 +12,9 @@ import unittest
 from app import create_app
 from app.forms import LoginForm
 
+#Firestore base de datos
+from app.firestore_service import get_users
+
 
 #iniciar la aplicacion Flask
 app=create_app()
@@ -53,28 +56,25 @@ def index():
 
 
 
-@app.route("/hello",methods=["GET","POST"])
+@app.route("/hello",methods=["GET"]) #,"POST"
 def hello():
     #user_ip=request.cookies.get("user_ip")
     user_ip=session.get("user_ip")
-    login_form=LoginForm()
+    #login_form=LoginForm()
     username=session.get("username")
     context={
         "user_ip":user_ip,
         "todos":todos,
-        "login_form":login_form,
+        #"login_form":login_form,
         "username":username
     }
     
-    if login_form.validate_on_submit():
-        username=login_form.username.data
-        session["username"]=username
-        flash("Nombre de usuario registrado con exito")
-        return redirect(url_for("index"))
+#    if login_form.validate_on_submit():
+#       username=login_form.username.data
+#       session["username"]=username
+#       flash("Nombre de usuario registrado con exito")
+#        return redirect(url_for("index"))
 
     return render_template("hello.html",**context)
 
-
-if __name__=="__main__":
-    app.run(port=5000,debug=True)
 

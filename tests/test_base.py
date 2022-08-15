@@ -28,7 +28,7 @@ class MainTest(TestCase):
         }
         response=self.client.post(url_for("hello"))
         self.assertTrue(response.status_code,405)
-    
+
     def test_auth_blueprint_exists(self):
         self.assertIn("auth",self.app.blueprints)
     

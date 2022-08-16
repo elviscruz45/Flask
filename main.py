@@ -13,7 +13,7 @@ from app import create_app
 from app.forms import TodoForm
 
 #Firestore base de datos
-from app.firestore_service import get_users , get_todos
+from app.firestore_service import get_users , get_todos, put_todo
 
 #iniciar la aplicacion Flask
 app=create_app()
@@ -66,7 +66,9 @@ def hello():
     }
     
     if todo_form.validate_on_submit():
-        pass
+        put_todo(user_id=username,description=todo_form.description.data)
+        flash("Tu tarea se creo con exito! ")
+        return redirect(url_for("hello"))
     
     return render_template("hello.html",**context)
 
